@@ -1,0 +1,39 @@
+<h1><%= @post.title %></h1>
+
+<p>Score: <%= @votes %></p>
+<%= button_to "Upvote", post_upvote_url(@post), method: :post %>
+<%= button_to "Downvote", post_downvote_url(@post), method: :post %>
+
+<% unless @post.url == "" %>
+  <%= link_to "URL", @post.url %>
+<% end %>
+
+<br>
+
+<p><%= @post.content %></p>
+<br>
+<% if current_user == @post.author || current_user == @post.moderator %>
+  <%= link_to "Edit Post", edit_post_url(@post) %>
+<% end %>
+
+<br><br>
+
+<% @post.subs.each do |sub| %>
+  <%= link_to "Back to #{sub.title}", sub_url(sub) %><br>
+<% end %>
+
+<br>
+  <%= link_to "Add comment", new_post_comment_url(@post) %>
+<br>
+
+<% @all_comments[nil].each do |comment| %>
+  <h4>User: <%= comment.author.username %></h4>
+
+  <p>Score: <%= comment.votes.sum(:value) %></p>
+  <%= button_to "Upvote", comment_upvote_url(comment), method: :post %>
+  <%= button_to "Downvote", comment_downvote_url(comment), method: :post %>
+
+  <p><%= comment.content %></p>
+  <p>Posted at:<%= comment.created_at %></p>
+  <%= render "layouts/comment", comment: comment, all_comments: @all_comments %>
+<% end %>

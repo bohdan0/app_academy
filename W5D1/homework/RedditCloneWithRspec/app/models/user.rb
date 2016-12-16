@@ -1,0 +1,55 @@
+class User < ApplicationRecord
+  validates :username, :email, :password_digest, :session_token, presence: true
+  validates :username, :email, uniqueness: true
+  validates :password, length: { minimum: 6, allow_nil: true }
+
+  after_initialize :ensure_session_token
+
+  has_many :subs,
+    foreign_key: :moderator_id,
+    primary_key: :id,
+    class_name: :sub
+
+  has_many :modded_posts,
+    through: :subs,
+    source: :posts
+
+  has_many :posts,
+    foreign_key: :author_id,
+    class_name: :Post
+
+  has_many :comments,
+    foreign_key: :author_id
+
+  attr_reader :password
+
+  def self.find_by_credentials(email, pw)
+    user = User.find_by_email(email)
+    return nil unless user
+    user.is_password?(pw) ? user : nil
+  end
+
+  def password=(pw)
+    @password = pw
+    self.password_digest = BCrypt::Password.create(pw)
+  end
+
+  def generate_session_token
+    SecureRandom.urlsafe_base64(128)
+  end
+
+  def ensure_session_token
+    self.session_token ||= generate_session_token
+  end
+
+  def reset_session_token
+    self.session_token = generate_session_token
+    self.save
+    self.session_token
+  end
+
+  def is_password?(pw)
+    BCrypt::Password.new(self.password_digest).is_password?(pw)
+  end
+
+end

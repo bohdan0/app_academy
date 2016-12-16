@@ -1,0 +1,39 @@
+<h1>
+<%= @user.username %>'s goals
+</h1>
+
+<ul>
+  <% @user.goals.each do |goal| %>
+    <% if current_user == goal.author || (current_user != goal.author && !goal.private)%>
+    <li>
+      <%= link_to goal.title, goal_url(goal) %>
+    </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<h2>Comments</h2>
+
+<ul>
+  <% @user.comments.each do |comment| %>
+    <li>
+      <%= comment.body %>
+      <%= "Posted By: #{comment.author.username}" %>
+      <% if current_user == comment.author %>
+        <%= button_to "Delete Comment", comment_url(comment), method: :delete %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<h4>Leave a Comment</h4>
+
+<form class="" action="<%= comments_url %>" method="post">
+  <%= auth_token %>
+  <textarea name="comment[body]" rows="8" cols="80"></textarea>
+
+  <input type="hidden" name="comment[commentable_id]" value="<%=@user.id%>">
+  <input type="hidden" name="comment[commentable_type]" value="<%=@user.class%>">
+
+  <input type="submit" name="" value="Submit Comment">
+</form>

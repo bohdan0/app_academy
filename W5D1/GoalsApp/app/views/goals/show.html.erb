@@ -1,0 +1,42 @@
+<h1><%= @goal.title %></h1>
+
+<br>
+<br>
+
+<%= @goal.body %>
+<br>
+<br>
+
+Completed: <%= @goal.completion %>
+
+<br>
+<br>
+
+<h2>Comments</h2>
+
+<ul>
+  <% @goal.comments.each do |comment| %>
+    <li>
+      <%= comment.body %>
+      <%= "Posted By: #{comment.author.username}" %>
+      <% if current_user == comment.author %>
+        <%= button_to "Delete Comment", comment_url(comment), method: :delete %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<h4>Leave a Comment</h4>
+
+<form class="" action="<%= comments_url %>" method="post">
+  <%= auth_token %>
+  <textarea name="comment[body]" rows="8" cols="80"></textarea>
+
+  <input type="hidden" name="comment[commentable_id]" value="<%=@user.id%>">
+  <input type="hidden" name="comment[commentable_type]" value="<%=@user.class%>">
+
+  <input type="submit" name="" value="Submit Comment">
+</form>
+
+
+<%= link_to "User Page", user_url(@goal.author) %>
