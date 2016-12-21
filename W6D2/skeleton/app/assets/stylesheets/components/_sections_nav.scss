@@ -1,0 +1,16 @@
+.sections-nav ul {
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  border-bottom: 1px solid $light-gray;
+  font-family: $sans-serif;
+}
+
+.sections-nav li {
+  display: inline-block;
+  padding: 7px;
+}
+
+.sections-nav li:hover {
+  background: $lightest-gray;
+}

@@ -1,0 +1,100 @@
+main {
+  margin-top: 15px;
+}
+
+main h1 {
+  font-size: 28px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+h3, h4, h5, h6 {
+  margin: 5px 0;
+}
+
+h3 {
+  font-size: 12px;
+}
+
+h4 {
+  color: $gray;
+  font-weight: normal;
+}
+
+h6 {
+  text-align: center;
+  color: $gray;
+  font-family: $sans-serif;
+}
+
+main ul {
+  padding-left: 15px;
+}
+
+
+main li {
+  list-style: disc;
+  list-style-position: outside;
+}
+
+iframe {
+  margin-bottom: 5px;
+}
+
+.article {
+  margin-top: 10px;
+  border-top: 1px solid $light-gray;
+}
+
+#opinion-header {
+  text-align: center;
+}
+
+.opinion li {
+  font-weight: bold;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+}
+
+.thumbnail img {
+  object-fit: cover;
+}
+
+.thumbnail {
+  height: 100px;
+  width: 100%;
+}
+
+input[type="text"] {
+  border: 1px solid $blue;
+  flex: 1;
+  font-family: $sans-serif;
+  padding-left: 10px;
+}
+
+input[type="submit"] {
+	border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+form {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+}
+
+main > div {
+  padding-bottom: 10px;
+  box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.2);
+}
+
+.comments {
+  color: $light-blue;
+}
+
+.article-ul li {
+  margin: 10px 0;
+}
