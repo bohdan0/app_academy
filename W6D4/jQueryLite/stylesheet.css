@@ -1,0 +1,43 @@
+.header {
+  background: lightgrey;
+  width: 100%;
+  float: left;
+}
+
+.header-nav {
+  background: yellow;
+  float: right;
+}
+
+.header-nav-list {
+  list-style-type: none;
+}
+
+.header-nav-list li {
+  border: 1px solid black;
+}
+
+.main {
+}
+
+div {
+  float: left;
+}
+
+.red {
+  width: 34%;
+  height: 500px;
+  background: red;
+}
+
+.blue {
+  width: 66%;
+  height: 500px;
+  background: blue;
+}
+
+.footer {
+  background: green;
+  width: 100%;
+  height: 50px;
+}
